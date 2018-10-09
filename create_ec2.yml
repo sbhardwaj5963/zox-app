@@ -41,6 +41,8 @@
           instance_type: "{{ ins_type }}"
           group_id: "{{ security_group.group_id }}"
           region: us-east-2
+          count_tag:
+            name: webserver
           exact_count: "{{ num_ins }}"
         register: ec2_instance   
       - debug: 
