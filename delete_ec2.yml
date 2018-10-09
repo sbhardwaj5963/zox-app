@@ -1,0 +1,15 @@
+---
+- name: Terminate instances
+  hosts: localhost
+  connection: local
+  vars_files:
+    - aws_creds.yml
+  tasks:
+    - name: Terminate instances that were previously launched
+      ec2:
+        state: 'absent'
+        instance_ids: '{{ n_del_val }}'
+        aws_access_key: "{{ aws_access_key }}"
+        aws_secret_key: "{{ aws_secret_key }}"
+        region: us-east-2
+

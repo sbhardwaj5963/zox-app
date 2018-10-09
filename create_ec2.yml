@@ -1,0 +1,53 @@
+- hosts: localhost
+  connection: local
+  gather_facts: false
+  vars_files:
+   - aws_creds.yml
+  tasks:
+      - name: create a security group in us-east-2
+        ec2_group:
+          name: dmz
+          description: an example ec2 group
+          region: us-east-2
+          aws_access_key: "{{ aws_access_key }}"
+          aws_secret_key: "{{ aws_secret_key }}"
+          rules:
+            - proto: tcp
+              from_port: 80
+              to_port: 80
+              cidr_ip: 0.0.0.0/0
+            - proto: tcp
+              from_port: 22
+              to_port: 22
+              cidr_ip: 0.0.0.0/0
+            - proto: tcp
+              from_port: 443
+              to_port: 443
+              cidr_ip: 0.0.0.0/0
+            - proto: udp
+              from_port: 10050
+              to_port: 10050
+              cidr_ip: 0.0.0.0/0      
+        register: security_group
+        
+        
+      - name: create ec2 instance
+        ec2:
+          aws_access_key: "{{ aws_access_key }}"
+          aws_secret_key: "{{ aws_secret_key }}"
+          image: "{{ ami_id }}"
+          keypair: samplekey
+          wait: yes
+          instance_type: "{{ ins_type }}"
+          group_id: "{{ security_group.group_id }}"
+          region: us-east-2
+          exact_count: "{{ num_ins }}"
+        register: ec2_instance   
+      - debug: 
+          var: ec2_instance    
+        
+      - name: save the variable ec2_instance to a file
+        copy:
+          content: "{{ ec2_instance }}"
+          dest: "created_instance_details/created_instance_details.json"
+        delegate_to: localhost    

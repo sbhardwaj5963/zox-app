@@ -1,0 +1,11 @@
+---
+- hosts: all
+  tasks:
+  - name: collecting facts about hosts
+    setup:
+    register: setupvar
+  - name: save all the collected facts to host specific file
+    copy:
+     content: "{{ setupvar.ansible_facts }}"
+     dest: "ansible_facts_dir/{{ inventory_hostname }}.json"
+    delegate_to: localhost
