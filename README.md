@@ -64,7 +64,8 @@ so that when monit program is installed in the remote instances, it can work pro
 We need to make the following changes in the monitrc file:<br>
 On line 80-82: change the gmail address in the double quotes to your own gmail address. Also change the password value
 (enclosed in double quotes) to your own gmail password. This sets up the smtp server that will be used by the monit
-program to send email alerts.<br>
+program to send email alerts. However, for that to work properly, you will need to make a little change to your gmail
+account settings: you need to enable "Less secure app access", which you can do by going here(https://myaccount.google.com/lesssecureapps)<br>
 Then on line 140, you need to change the email address to the one where you'd like to email alerts fromt the monit
 program.<br>
 
