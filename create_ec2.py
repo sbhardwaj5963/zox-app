@@ -26,7 +26,7 @@ with open('created_instance_details/created_instance_details.json', 'r') as fh:
 				hfh.write(i['id']+" ansible_user=ubuntu ansible_host="+i['public_ip']+" ansible_python_interpreter=/usr/bin/python3\n")
 				
 			else: 
-				hfh.write(i['id']+" ansible_user=ec2-user ansible_host="+i['public_ip']+" ansible_python_interpreter=/usr/bin/python3\n")
+				hfh.write(i['id']+" ansible_user=ec2-user ansible_host="+i['public_ip']+"\n")
 	
 	
 	
