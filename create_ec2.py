@@ -4,7 +4,7 @@ import json
 
 print "Please enter the ami id of the Linux instance (for example ami-0f65671a86f061fcd):"
 ami_id = str(raw_input())
-print "Please enter the distro type (permissible values: ubuntu, amazon-linux):"
+print "Please enter the distro type of the ami that you just entered (permissible values: ubuntu, amazon-linux):"
 distro_type = str(raw_input())
 print "Please enter the instance type (for example t2.micro):"
 ins_type = str(raw_input())

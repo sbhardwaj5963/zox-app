@@ -7,7 +7,7 @@
     when: ansible_os_family == 'Debian'
     
   - name: yum update
-    yum: update_cache=yes
+    command: yum makecache
     become: true   
     when: ansible_os_family == 'RedHat' 
     
